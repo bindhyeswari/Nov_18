@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        // create a new image and load it using a src
+        // var img = new Image();
+        // img.addEventListener('load', function() {
+        // console.log('Image loaded');
+        // });
+        // img.src = 'url goes here'
+
+
+
+        var img = new Image();
+
+        img.addEventListener('load', function () {
+            console.log('Image loaded');
+            // wait for 300ms
+            // try to read the image data using a reader
+
+            setTimeout(function () {
+                var canvas = document.getElementById('canvas1');
+                var context = canvas.getContext('2d');
+                context.drawImage(img, 0,0);
+            }, 300);
+
+
+        });
+
+        img.src = 'http://static.comicvine.com/uploads/ignore_jpg_scale_super/0/4115/398734-199236-darth-vader.jpg';
+
+
+        // read all the input files
+        // set them as sources of image elements
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.lastElementChild.addEventListener('click', function () {
+
+                var inp = document.body.children[2];
+                console.log(inp.files.length);
+
+
+
+
+            });
+        });
+
+
+
+    </script>
+</head>
+<body>
+    <img id="darth_vader"/>
+    <canvas id="canvas1"></canvas>
+    <input multiple type="file" id="inp1"/>
+    <button>Print all images</button>
+</body>
+</html>
