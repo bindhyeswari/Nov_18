@@ -16,20 +16,10 @@
 
         var img = new Image();
 
-        var data = xhr();
-
         img.addEventListener('load', function () {
             console.log('Image loaded');
             // wait for 300ms
             // try to read the image data using a reader
-
-            setTimeout(function () {
-                var canvas = document.getElementById('canvas1');
-                var context = canvas.getContext('2d');
-                context.drawImage(img, 0,0);
-
-
-            }, 300);
 
 
         });

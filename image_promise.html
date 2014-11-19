@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        function getImagePromise(url) {
+            return new Promise(function (resolve, reject) {
+
+                var img = document.createElement('img');
+                img.addEventListener('load', function () {
+                    resolve(img);
+                });
+                img.addEventListener('error', function () {
+                    reject();
+                });
+                img.src = url;
+            });
+        }
+
+        getImagePromise('').then(function (img) {
+            // resolve function
+            // this will get fired when there is a fulfilled
+            document.body.appendChild(img);
+        }, function () {
+            console.log('something went wrong ... ');
+        });
+
+        // todo: show chaining pattern to Talin
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
