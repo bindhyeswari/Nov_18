@@ -16,6 +16,8 @@
 
         var img = new Image();
 
+        var data = xhr();
+
         img.addEventListener('load', function () {
             console.log('Image loaded');
             // wait for 300ms
@@ -25,6 +27,8 @@
                 var canvas = document.getElementById('canvas1');
                 var context = canvas.getContext('2d');
                 context.drawImage(img, 0,0);
+
+
             }, 300);
 
 
@@ -35,15 +39,23 @@
 
         // read all the input files
         // set them as sources of image elements
+        // todo: Write a directive which reads selected image files and prints them to onto the browser
 
         document.addEventListener('DOMContentLoaded', function () {
             document.body.lastElementChild.addEventListener('click', function () {
 
-                var inp = document.body.children[2];
-                console.log(inp.files.length);
+                var inp = document.body.children[3];
+                console.log(inp.files); // FileList Object
 
+                var reader = new FileReader(); // create a filereader
 
+                reader.addEventListener('loadend', function () {
+                    console.log(reader.result);
 
+                    document.getElementById('file_reader_img').src = reader.result;
+                });
+
+                reader.readAsDataURL(inp.files[0]); // read the first file
 
             });
         });
@@ -55,6 +67,7 @@
 <body>
     <img id="darth_vader"/>
     <canvas id="canvas1"></canvas>
+    <img id="file_reader_img"/>
     <input multiple type="file" id="inp1"/>
     <button>Print all images</button>
 </body>

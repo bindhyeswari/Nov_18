@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../base.css"/>
+    <script type="text/javascript">
+        // Making a promise call using AJAX
+        // Promise has 3 states - pending fullfilled and rejected
+
+        function getCountryInfo(coutry_name) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://restcountries.eu/rest/v1/name/' + coutry_name);
+                xhr.setRequestHeader('accept', 'application/json');
+                xhr.addEventListener('readystatechange', function () {
+                    if( xhr.readyState === 4 ) {
+                        if ( xhr.status === 200 ) {
+                            var obj = JSON.parse(xhr.responseText);
+                            console.log(obj);
+                            resolve(obj);
+                        } else {
+                            reject(Error('There was an error getting the data: ' + xhr.statusText));
+                        }
+
+                    }
+                });
+                xhr.send();
+            });
+        }
+
+        getCountryInfo('france').then(function (obj) {
+            // Do this when the promise is successful
+            document.getElementById('data').innerHTML = JSON.stringify(obj);
+        }, function (error) {
+            // Do this when the promise was rejected / unsuccessful
+            document.getElementById('data').innerHTML = error.message;
+        });
+
+
+
+
+
+    </script>
+</head>
+<body>
+<div id="data"></div>
+</body>
+</html>
